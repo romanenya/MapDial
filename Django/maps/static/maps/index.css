@@ -1,0 +1,86 @@
+/*Стилизация полосы прокрутки*/
+::-webkit-scrollbar{ 
+    background: #5b5ca7;
+    width: 10px;    
+  } 
+  ::-webkit-scrollbar-track{  
+    background-color: #5b5ca7;
+  } 
+  ::-webkit-scrollbar-thumb{ 
+    background: #7274D1;
+  }
+
+html,body{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.menu{
+    position: absolute;
+    right: 0;
+    background-color: #5b5ca7;
+    height: 100%;
+    width: 20%;
+    overflow-y: hidden;
+}
+.elements{
+    overflow-y: scroll;
+    height: calc(100% - 60px);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.el_menu{
+    background-color: white;
+    color: #707070;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    height: 20px;
+    margin-right: 0;
+    transition-duration: .5s;
+}
+#map {
+    width: 80%; 
+    height: 100%; 
+    padding: 0; 
+    margin: 0;
+    font-family: Segoe UI;
+    color: #707070;
+}
+.icon_plus{
+    position: absolute;
+    right: 20px;
+    opacity: 50%;
+    cursor: pointer;
+}
+.search{
+    position: fixed;
+    border: 10px #7274D1 solid;
+    width: calc(20% - 40px);
+    z-index: 10;
+    margin: 0;
+}
+.search input{
+    border: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.search input:focus{
+    border: 0;
+    outline: none !important;
+}
+.icon_search{
+    position: absolute;
+    right: 20px;
+    opacity: 50%;
+    cursor: pointer;
+}
+.hide{
+    display: none;
+}

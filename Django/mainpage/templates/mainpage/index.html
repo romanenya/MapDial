@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MapDial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'mainpage/img/favicon.ico' %}" />
+    <link rel="stylesheet" href='{% static "mainpage/index.css" %}'>
+    <link rel="stylesheet" href="{% static 'mainpage/index_2.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> <!-- JQUERY -->
+</head>
+<body>
+
+    <script>
+        var click_lan = false;
+        function language(){
+            if (click_lan == false){
+                document.querySelector('.menu').classList.add('menu_active');
+                document.querySelector('.mainstr').classList.add('mainstr_active');
+                click_lan = true;
+            }
+            else{
+                document.querySelector('.menu').classList.remove('menu_active');
+                document.querySelector('.mainstr').classList.remove('mainstr_active');
+                click_lan = false;  
+            }
+        }
+    </script>
+
+    <div class="blur"></div>
+
+    <div class="menu">
+            <img class='up' onclick="language()" src="{% static 'mainpage/img/arrow-circle-up-solid.svg' %}" alt="">
+            <div class="lan header_txt">
+                <a href="https://vk.com/mapdial" class="header_txt vk"><img style="opacity: 50%;" src="{% static 'mainpage/img/vk-brands.svg' %}" height='30px'></a>
+                <a href="https://t.me/mapdial" class="header_txt telegram"><img style="opacity: 50%;" src="{% static 'mainpage/img/telegram-plane-brands.svg' %}" height='30px'></a>
+            <a style="cursor: pointer;" onclick="language()">
+                {{ links.lan }}
+            </a></div>
+            <div class="language_list">
+                {% for el in languages%}
+                    <a href="/{{ el.0 }}" class="language_el"><div>{{ el.1 }}</div></a>
+                {% endfor %}
+            </div>
+        </div>
+
+<div class="header">
+			<div class="name"><b>MapDial</b></div>
+			<a href="about" class="about_us header_txt">{{ links.about }}</a>
+			<a href="documentation" class="doc header_txt">{{ links.doc }}</a>
+            <a href="chronology" class="contact header_txt">{{ links.chronology }}</a>
+            <a href="contacts" class="contact header_txt">{{ links.contacts }}</a>
+            {% comment %} <a href="https://t.me/mapdial" class="header_txt telegram"><img style="opacity: 50%;" src="{% static 'mainpage/img/telegram-plane-brands.svg' %}" height='30px'></a> {% endcomment %}
+			<div class="log-reg">
+				<!-- {% if user.is_authenticated %}
+				<div class="header_txt"><a href="">{{ user.first_name }} {{ user.last_name }}</a></div>
+				<div class="header_txt"><a href="admin/logout" style="color: #E51A1A">Выйти</a></div>
+				{% else %}
+				<a href="login" class="login header_txt">Войти</a>
+				<a href="register" class="register header_txt">Регистрация</a>
+				{% endif %} -->
+			</div>
+
+		</div>
+	    <div class="mainstr">
+	    	<span>{{ links.phrase }}</span>
+	    	<a class="start_str" href="start">{{ links.start }}</a>
+            <a class="start_str_m" href="start">{{ links.start_mobile }}</a>
+	    </div>
+
+<!-- Circle effect -->
+
+<svg class="blobCont">
+        <image style="opacity: .5" href="{% static 'mainpage/img/bliss_4k_desktop.jpg' %}" mask="url(#mask)" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+        <defs>
+            <mask id="mask" x="0" y="0">
+                <g style="filter: url(#gooey)">
+          <circle class="blob" cx="10%" cy="10%" r="80" fill="white" stroke="white"/>
+                    <circle class="blob" cx="50%" cy="10%" r="40" fill="white" stroke="white"/>
+                    <circle class="blob" cx="17%" cy="15%" r="70" fill="white" stroke="white"/>
+                    <circle class="blob" cx="90%" cy="20%" r="120" fill="white" stroke="white"/>
+                    <circle class="blob" cx="30%" cy="25%" r="30" fill="white" stroke="white"/>
+          <circle class="blob" cx="50%" cy="60%" r="80" fill="white" stroke="white"/>
+                    <circle class="blob" cx="70%" cy="90%" r="10" fill="white" stroke="white"/>
+                    <circle class="blob" cx="90%" cy="60%" r="90" fill="white" stroke="white"/>
+                    <circle class="blob" cx="30%" cy="90%" r="80" fill="white" stroke="white"/>
+          <circle class="blob" cx="10%" cy="10%" r="80" fill="white" stroke="white"/>
+                    <circle class="blob" cx="50%" cy="10%" r="20" fill="white" stroke="white"/>
+                    <circle class="blob" cx="17%" cy="15%" r="70" fill="white" stroke="white"/>
+                    <circle class="blob" cx="40%" cy="20%" r="120" fill="white" stroke="white"/>
+                    <circle class="blob" cx="30%" cy="25%" r="30" fill="white" stroke="white"/>
+          <circle class="blob" cx="80%" cy="60%" r="80" fill="white" stroke="white"/>
+                    <circle class="blob" cx="17%" cy="10%" r="100" fill="white" stroke="white"/>
+                    <circle class="blob" cx="40%" cy="60%" r="90" fill="white" stroke="white"/>
+                    <circle class="blob" cx="10%" cy="50%" r="80" fill="white" stroke="white"/>
+                </g>
+            </mask>
+            <filter id="gooey" height="130%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+        </filter>
+        </defs>
+    </svg>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ links.title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=b29704bc-92ae-442a-a494-c662196cd3a0" type="text/javascript"></script>
+    <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'mainpage/img/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'maps/index.css' %}">
+    <script src="{% static 'maps/search.js' %}"></script>
+</head>
+<body>
+
+<script>
+
+    function about_point(name, text, author, groop){
+      return '<b>' + name + '</b>' + '<br><b>Описание:</b> ' + text + '<br><b>Автор:</b> ' + author + '<br><b>Группа:</b> ' + groop
+    }
+
+    ymaps.ready(init);
+
+  //Инициализация карт
+  function init () {
+      var geolocation = ymaps.geolocation,
+        myMap = new ymaps.Map('map', {
+            center: [55, 34],
+            zoom: 10,
+        }, {
+            searchControlProvider: 'yandex#search'
+        });
+
+  var Points = [
+    {% for el in points %}
+      {
+        name: '{{ el.name }}',
+        text: '{{ el.text }}',
+        author: '{{ el.author }}',
+        groop: '{{ el.groop }}',
+        coords: [{{ el.point_y }}, {{ el.point_x }}],
+      },
+    {% endfor %}
+  ]
+        
+  var myGeoObjects = [];
+
+for (var i = 0; i < Points.length; i++) {
+  myGeoObjects[i] = new ymaps.GeoObject({
+    geometry: {
+      type: "Point",
+      coordinates: Points[i].coords,
+    },
+    properties: {
+      clusterCaption: Points[i].name,
+      balloonContentBody: about_point(Points[i].name, Points[i].text, Points[i].author, Points[i].groop)
+    }
+  });
+}
+
+var myClusterer = new ymaps.Clusterer(
+  {clusterDisableClickZoom: true}
+);
+myClusterer.add(myGeoObjects);
+myMap.geoObjects.add(myClusterer);
+        
+        
+ // Сравним положение, вычисленное по ip пользователя и
+    // положение, вычисленное средствами браузера.
+    /*geolocation.get({
+        provider: 'yandex',
+        mapStateAutoApply: true
+    }).then(function (result) {
+        // Красным цветом пометим положение, вычисленное через ip.
+        {% comment %} result.geoObjects.options.set('preset', 'islands#redCircleIcon'); {% endcomment %}
+        result.geoObjects.get(0).properties.set({
+            balloonContentBody: 'Мое местоположение'
+        });
+        myMap.geoObjects.add(result.geoObjects);
+    });*/
+
+    geolocation.get({
+        provider: 'browser',
+        mapStateAutoApply: true
+    }).then(function (result) {
+        // Синим цветом пометим положение, полученное через браузер.
+        // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
+        {% comment %} result.geoObjects.options.set('preset', 'islands#blueCircleIcon'); {% endcomment %}
+        myMap.geoObjects.add(result.geoObjects);
+    });
+
+myMap.panTo([myClusterer.geometry.getCoordinates()], {
+                            delay: 0,
+                            flying: true
+                        }).then(function() {
+                            myMap.setZoom(3);
+                        });
+
+        }
+</script>
+
+
+
+<script>
+  $(document).on('click','.el_menu',function(e){
+console.log( $(".el_menu").val($(this).text()) );
+});
+
+</script>
+
+
+
+<div id="map"></div>
+
+  <div class="menu">
+    <div class="search el_menu"><input type="text" id="search" placeholder="Найти группу"><img class="icon_search" src="{% static 'maps/img/search-solid.svg' %}" alt="" width="20px"></div>
+    
+    <div class="elements" id="elements">
+          <div class="el_menu"><span>SH11</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH12</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH13</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH14</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH15</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH16</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH17</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH18</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH19</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH20</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH11</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH12</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH13</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH14</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH15</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH16</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH17</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH18</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH19</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          <div class="el_menu"><span>SH20</span> <img class="icon_plus" src="{% static 'maps/img/plus-square-regular.svg' %}" width="20px" style="color: #7274D1"></div>
+          
+          {% comment %} {{ add_point(request,1) }} {% endcomment %}
+
+    </div>
+  </div>
+
+</body>
+</html>

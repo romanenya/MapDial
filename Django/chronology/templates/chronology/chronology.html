@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ chronology.title }}</title>
+    {% load static %}
+    <script src="{% static 'chronology/jquery-3.5.1.min.js' %}"></script>
+    <link rel="shortcut icon" href="{% static 'mainpage/img/favicon.ico' %}" />
+    <link rel="stylesheet" href='{% static "chronology/chronology.css" %}'>
+    <link rel="stylesheet" href="{% static 'chronology/fullpage.css' %}">
+    <script src="{% static 'chronology/fullpage.js' %}"></script>
+</head>
+<body>
+    {% if chronology.error_with_language %}
+
+        <script>
+            function error(){
+                document.querySelector('.error').classList.add('hide_error');
+            };
+        </script>
+
+        <div class="error">
+            {{ chronology.error_with_language }}
+            <img src="{% static 'chronology/img/times-circle-regular.svg' %}" width="20px" onclick='error()'>
+        </div>
+
+    {% endif %}
+
+        {% comment %} Начало хронологий {% endcomment %}
+
+        <div id="fullpage">
+
+            {% for el in chronology_el %}
+                    <div class="section">
+                        
+                        <div class="info">
+                            <div class="date">
+                            {{ el.date }}
+                        </div>
+                        <div class="title">
+                            {{ el.title }}
+                        </div>
+                        </div>
+
+                        <div class="file">
+                            <img src="{{ el.file.url }}" height="500px">
+                        </div>
+                    </div>
+            {% endfor %}
+
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $('#fullpage').fullpage({
+                    scrollingSpeed: 700,
+                    navigation: true
+                });
+            });
+        </script>
+
+</body>
+</html>
