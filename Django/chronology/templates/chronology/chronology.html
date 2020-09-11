@@ -21,7 +21,9 @@
         </script>
 
         <div class="error">
-            {{ chronology.error_with_language }}
+            <span>
+                {{ chronology.error_with_language }}
+            </span>
             <img src="{% static 'chronology/img/times-circle-regular.svg' %}" width="20px" onclick='error()'>
         </div>
 
@@ -44,7 +46,7 @@
                         </div>
 
                         <div class="file">
-                            <img src="{{ el.file.url }}" height="500px">
+                            <img src="{{ el.file.url }}">
                         </div>
                     </div>
             {% endfor %}

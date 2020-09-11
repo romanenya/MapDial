@@ -1,0 +1,55 @@
+body{
+    font-family: Segoe UI;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+.developers{
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+}
+.photos{
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+@media (orientation: landscape){
+    .img{
+        background-color: lightcyan;
+        width: 25em;
+        height: 30em;
+        margin: 2em;
+        display: flex;
+        flex-wrap: wrap;
+        background-size: cover;
+        background-position: center;
+        border-radius: 3em;
+        transition-duration: .5s;
+        margin-bottom: 0;
+    }
+}
+@media (orientation: portrait){
+    .img{
+        background-color: lightcyan;
+        width: 50em;
+        height: 60em;
+        margin: 2em;
+        display: flex;
+        flex-wrap: wrap;
+        background-size: cover;
+        background-position: center;
+        border-radius: 3em;
+        transition-duration: .5s;
+        margin-bottom: 0;
+    }
+}
+.info_name{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-top: 0;
+}

@@ -4,9 +4,33 @@
 	<meta charset="UTF-8">
 	<title>Contacts</title>
 	{% load static %}
+	<link rel="stylesheet" href="{% static 'mainpage/contacts.css' %}">
 	<link rel="shortcut icon" href="{% static 'mainpage/img/favicon.ico' %}" />
+	<link rel="stylesheet" href="{% static 'mainpage/animate.css' %}">
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>Page of contacts</h1>
+		<script src="{% static 'wow.min.js' %}"></script>
+		<script>
+            new WOW().init();
+        </script>
+
+		<div class="developers">
+			<h1>Разработчики</h1>
+			<div class="photos">
+
+				<div class="info_name romanenya">
+					<div class="img wow rollIn" style="background-image: url('{% static "mainpage/img/t8sbaG7r3mc.jpg" %}')"></div>
+					<h3>Романеня Александр</h3>
+				</div>
+
+				<div class="info_name hotko">
+					<div class="img wow rollIn" style="background-image: url('{% static 'mainpage/img/photo_2020-09-08_19-23-04.jpg' %}')"></div>
+					<h3>Хотько Александр</h3>
+				</div>
+
+			</div>
+		</div>
+
 </body>
 </html>
